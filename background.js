@@ -1,18 +1,18 @@
 chrome.runtime.onMessage.addListener(onMessage);
 
-function onMessage(message) {
-    fetch('https://my-dev-test-dev-ed.my.salesforce.com/services/data/v47.0/query/?q=select+Id+from+Account',
-    {
-        method: 'GET',
-        headers: createHeaders()
-    })
-    .then(response => {
-        console.log(response.body);
-        if (!response) throw "XDDD";
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
+function onMessage(message, sender, sendResponse) {
+    console.log(message);
+    const soql = encodeURI(message.soql);
+    fetch('https://my-dev-test-dev-ed.my.salesforce.com/services/data/v47.0/query/?q=' + soql,
+        {
+            method: 'GET',
+            headers: createHeaders()
+        })
+        .then(response => {
+            console.log(response.body);
+            sendResponse({'response': response.body});
+        })
+        .catch(error => console.log(error));
 
     return true;
 }

@@ -12,4 +12,8 @@ changeColor.onclick = element => {
             tabs[0].id,
             {code: 'document.body.style.backgroundColor = "' + color + '";'});
     });
+
+    chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+
+    });
 };

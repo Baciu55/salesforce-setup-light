@@ -1,13 +1,21 @@
 {
-  "name": "First",
+  "name": "Salesforce Query Helper",
   "version": "1.0",
-  "description": "First Extension",
-  "permissions": ["activeTab","declarativeContent","storage"],
+  "description": "Salesforce Query Helper",
+  "manifest_version": 2,
+  "permissions": ["activeTab", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
   },
-  "page_action": {
+  "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "images/get_started16.png",
@@ -22,6 +30,5 @@
     "48": "images/get_started48.png",
     "128": "images/get_started128.png"
   },
-  "options_page": "options.html",
-  "manifest_version": 2
+  "options_page": "options.html"
 }
